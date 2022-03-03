@@ -19,6 +19,12 @@ local FocusLabel = Instance.new("TextLabel")
 local ExpLabel = Instance.new("TextLabel")
 local BackgroundImage = Instance.new("ImageLabel")
 local Title = Instance.new("TextLabel")
+function AddCommas(p2)
+	if type(p2) ~= "string" then
+		p2 = tostring(p2);
+	end;
+	return #p2 % 3 == 0 and p2:reverse():gsub("(%d%d%d)", "%1,"):reverse():sub(2) or p2:reverse():gsub("(%d%d%d)", "%1,"):reverse();
+end;
 local function CreateHover(player)
 	local Player = player
 	--Properties:
@@ -268,20 +274,20 @@ local function CreateHover(player)
 
 	task.spawn(function()
 		while true and Player and Board.Parent ~= game.ReplicatedStorage do
-			LevelLabel.Text = "LVL: "..Player.PlayerFolder.Stats.Level.Value
-			ExpLabel.Text = "EXP: "..Player.PlayerFolder.Stats.Experience.Value
-			FocusLabel.Text = "FOC: "..Player.PlayerFolder.Stats.Focus.Value
-			ReputationLabel.Text = "REP: "..Player.PlayerFolder.Stats.Reputation.Value
-			YenLabel.Text = "YEN: "..Player.PlayerFolder.Stats.Yen.Value
+			LevelLabel.Text = "LVL: "..AddCommas(Player.PlayerFolder.Stats.Level.Value)
+			ExpLabel.Text = "EXP: "..AddCommas(Player.PlayerFolder.Stats.Experience.Value)
+			FocusLabel.Text = "FOC: "..AddCommas(Player.PlayerFolder.Stats.Focus.Value)
+			ReputationLabel.Text = "REP: "..AddCommas(Player.PlayerFolder.Stats.Reputation.Value)
+			YenLabel.Text = "YEN: "..AddCommas(Player.PlayerFolder.Stats.Yen.Value)
 			if Player.PlayerFolder.Customization.Team.Value == "Ghoul" then
-				WeaponLabel.Text = "KAG: "..Player.PlayerFolder.Stats.Weapon.Value
+				WeaponLabel.Text = "KAG: "..AddCommas(Player.PlayerFolder.Stats.Weapon.Value)
 			else
-				WeaponLabel.Text = "QUI: "..Player.PlayerFolder.Stats.Weapon.Value
+				WeaponLabel.Text = "QUI: "..AddCommas(Player.PlayerFolder.Stats.Weapon.Value)
 			end
-			DurabilityLabel.Text = "DUR: "..Player.PlayerFolder.Stats.Durability.Value
-			SpeedLabel.Text = "SPD: "..Player.PlayerFolder.Stats.Speed.Value
-			PhysicalLabel.Text = "PHY: "..Player.PlayerFolder.Stats.Physical.Value
-			RCLabel.Text = "RC: "..Player.PlayerFolder.Stats.RC.Value
+			DurabilityLabel.Text = "DUR: "..AddCommas(Player.PlayerFolder.Stats.Durability.Value)
+			SpeedLabel.Text = "SPD: "..AddCommas(Player.PlayerFolder.Stats.Speed.Value)
+			PhysicalLabel.Text = "PHY: "..AddCommas(Player.PlayerFolder.Stats.Physical.Value)
+			RCLabel.Text = "RC: "..AddCommas(Player.PlayerFolder.Stats.RC.Value)
 			wait(1)
 		end
 	end)
